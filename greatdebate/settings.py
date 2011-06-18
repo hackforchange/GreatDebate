@@ -123,6 +123,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'greatdebate.apps.campaigns',
+    'greatdebate.apps.organizers',
+    'greatdebate.apps.decisionMakers',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
