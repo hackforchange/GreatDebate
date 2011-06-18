@@ -11,6 +11,9 @@ class Activist(models.Model):
   city = models.CharField(max_length=255, null=True, blank=True)
   zip = models.IntegerField(null=True, blank=True)
 
+  def __unicode__(self):
+    return u'%s-%s' % (self.first_name,self.last_name)
+
 class ActivistResponse(models.Model):
   """
   This is the object for an activist's response for a specific campaign
@@ -18,3 +21,6 @@ class ActivistResponse(models.Model):
   campaign = models.ForeignKey('campaigns.Campaign')
   activist = models.ForeignKey(Activist) 
   message = models.TextField(null=True, blank=True)
+
+  def __unicode__(self):
+    return u'%s-%s' % (self.campaign.title, self.activist.first_name)
