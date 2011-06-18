@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% load facebook_tags %}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Create A Campaign</title>
+    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/media/js/jquery-ui-1.8.2.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.8.2.custom.css" />
+    <script>
+    $(function() {
+     tag_hash = [];
+     selected_tags = [];
+ 
+     $( "#tags" ).autocomplete({
+       //source: availableTags
+       //source: "http://pelican.dyn-o-saur.com:1111/decision_maker_lookup/"
+       source: function(term_obj,add) {  
+       console.log(term_obj.term);
+       $.getJSON("/decision_maker_lookup/?",term_obj,function(data) {
+        console.log(data);
+        var suggestions = [];
+        $.each(data,function(i, val) {
+          console.log(tag_hash[val.label]);
+          if(selected_tags[val.id] != 1){ 
+            suggestions.push(val.label);
+            tag_hash[val.label] = val.id; 
+          }
+        });
+        console.log(suggestions);
+        add(suggestions);
+       })
+       }
+    });
+   });
+ 
+   function addTag() {
+    name = $("#tags").attr('value');
+    id = tag_hash[name];
+    selected_tags[id] = 1;
+    if ($('#default_dm').length === 1) {
+      $('#default_dm').remove(); 
+    }
+    $("#selected_dms").append("<li>"+name+"</li>");
+    $("#tags").attr("value","");
+   }
+
+  function verify_dm_is_selected() {
+    if ($('#selected_dms').length == 0 || $('#default_dm').length == 1) {
+      alert('Please Select a Decision Maker');
+      return false;
+    }
+    add_decision_makers_input();
+    document.save_campaign.submit();
+  }  
+
+   function add_decision_makers_input() {
+     list = new Array();
+     for(var key in selected_tags) {
+       if(selected_tags.hasOwnProperty(key)) {
+        list.push(key);
+      }
+     }
+     $("form[name=save_campaign]").append('<input type="hidden" name="decision_makers" value="'+list.join()+'"/>')
+   }
+
+ </script>
+</head>
+
+  <body>
+    <div id="header"></div>
+    <div id="container">
+      <div id="logo">
+        <a href="/"><img src="/media/images/greatdebate.gif" /></a>
+      </div>
+      <div id="sidebar">
+        <h3><b>Step One</b> - Sign Up</h3></span>
+        {% if not takeaction_url %}
+          <span class="active_page"><h3><b>Step Two</b> - Create</h3></span>
+          <h3><b>Step Three</b> - Promote</h3>
+        {% else %}
+          <h3><b>Step Two</b> - Create</h3>
+          <span class="active_page"><h3><b>Step Three</b> - Promote</h3></span>
+        {% endif %}
+        <div class="change_this_to_tips">
+          <!--
+          Helpful Tips:
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ullamcorper, augue at tincidunt dapibus, lorem lacus euismod justo, ac euismod libero mi a elit.
+          -->
+        </div>
+      </div><!--sidebar-->
+      <div id="body">
+        <p>
+          <h4>Create a campaign</h4>
+          GreatDebate will create a take action button for your campaign
+        </p>
+        {% if not user.is_authenticated %}
+          <p>
+            <h4>Link a login (optional)</h4>
+            Setup a login so you can access your campaign results
+            {% facebook_button %}
+          </p>
+        {% endif %}
+        <p>
+          <h4>Campaign Information</h4>
+          We need a little bit of information to set up your campaign
+          <form method="POST" action="/save_campaign/" name="save_campaign">
+            <h4>Campaign URL: <input type="text" name="campaign_url" /></h4>
+            <h4>Decision Makers: <input id="tags" type="text" name="decision_makers" />
+              <a href="javascript: addTag();">Add</a>  <a href="/new_dm/">New</a>
+            </h4>
+            <ul id="selected_dms" />
+              <li id="default_dm" style="color:red;">No Decision Makers Selected</li>
+            </ul>
+            <h4>Title: <input type="text" name="campaign_title" /></h4>
+            <h4>Body: <input type="text" name="campaign_body" /></h4>
+          </form>
+        </p>
+        <p>
+          <h4>TakeAction Form (<a href="javascript: verify_dm_is_selected();">Get Button code</a>)</h4>
+        </p>
+
+        <p>
+          <h4>The code below will create a takeaction button for your site</h4>
+          <textarea cols="30" rows="4">
+            {{ takeaction_url }}
+          </textarea> 
+      </div><!--body-->
+
+      <div id="footer"><a href="#">About Us</a> | <a href="#">Privacy</a> | <a href="#">Terms of Use</a> | <a href="#">Contact Us</a> | <a href="#">Help & Support</a> | <a href="#">Blog</a> </div>
+    </div><!--container-->
+  </body>
+</html>
+{% facebook_js %}

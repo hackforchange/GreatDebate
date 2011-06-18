@@ -1,0 +1,53 @@
+{% load facebook_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<link href='http://fonts.googleapis.com/css?family=Wire+One&v1' rel='stylesheet' type='text/css'>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Great Debate</title>
+    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div id="homepage">
+      <img class="center" src="/media/images/cleanlogo.gif" />
+      <div id="homeleft">
+          <p>
+            <div id="social">
+              {% if not user.is_authenticated %}
+                {% facebook_button %}
+              {% endif %}
+            </div>
+          </p>
+      </div> <!--homeleft-->
+
+      <div id="homeright">
+          <h1>Get Started</h1>
+          <p>
+            <div class="button">
+              <a href="/signup/">New Organizer</a>
+            </div>
+          </p>
+          <p>
+            <div class="button">
+              <a href="/create_campaign/">Create a Campaign</a>
+            </div>
+          </p>
+          {% if user.is_authenticated %}
+            <p>
+              <div class="button">
+                <a href="/current_campaigns/">Current Campaigns</a>
+              </div>
+            </p>
+          {% endif %}
+          <p>
+            <div class="button">
+              <a href="/respond/">Post a Response</a>
+            </div>
+          </p>
+      </div><!--homeright-->
+    </div> <!--homepage-->
+  </body>
+</html>
+{% facebook_js %}
+
