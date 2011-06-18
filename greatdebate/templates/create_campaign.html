@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-{% load facebook_tags %}
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -77,13 +76,10 @@
       </div>
       <div id="sidebar">
         <h3><b>Step One</b> - Sign Up</h3></span>
-        {% if not takeaction_url %}
           <span class="active_page"><h3><b>Step Two</b> - Create</h3></span>
           <h3><b>Step Three</b> - Promote</h3>
-        {% else %}
           <h3><b>Step Two</b> - Create</h3>
           <span class="active_page"><h3><b>Step Three</b> - Promote</h3></span>
-        {% endif %}
         <div class="change_this_to_tips">
           <!--
           Helpful Tips:
@@ -96,13 +92,10 @@
           <h4>Create a campaign</h4>
           GreatDebate will create a take action button for your campaign
         </p>
-        {% if not user.is_authenticated %}
           <p>
             <h4>Link a login (optional)</h4>
             Setup a login so you can access your campaign results
-            {% facebook_button %}
           </p>
-        {% endif %}
         <p>
           <h4>Campaign Information</h4>
           We need a little bit of information to set up your campaign
@@ -133,4 +126,3 @@
     </div><!--container-->
   </body>
 </html>
-{% facebook_js %}
