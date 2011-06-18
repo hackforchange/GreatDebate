@@ -2,13 +2,15 @@
 import os
 import sys
 
-DEBUG = True
+DEBUG = False 
 TEMPLATE_DEBUG = DEBUG
 PROJECT_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
+
+URL_ROOT = 'http://crane.dyn-o-saur.com'
 
 MANAGERS = ADMINS
 
@@ -120,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'greatdebate.apps.campaigns',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
