@@ -1,7 +1,10 @@
 # Django settings for greatdebate project.
+import os
+import sys
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+PROJECT_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -11,8 +14,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
+        'ENGINE': 'django.db.backends.sqllite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'greadebate.db',                      # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -143,3 +146,12 @@ LOGGING = {
         },
     }
 }
+
+try:
+  from local_settings import *
+except ImportError:
+  pass
+
+SERVE_MEDIA = DEBUG
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media")
+MEDIA_URL = "/media/"
