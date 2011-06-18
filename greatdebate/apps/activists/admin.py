@@ -1,5 +1,5 @@
 from django.contrib import admin
-from greatdebate.apps.activists import Activist, ActivistResponse
+from greatdebate.apps.activists.models import Activist, ActivistResponse
 
 class ActivistAdmin(admin.ModelAdmin):
   fields = ('first_name', 'last_name', 'email', 'address', 'city', 'zip')
