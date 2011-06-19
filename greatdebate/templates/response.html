@@ -82,13 +82,9 @@
           <h4>Post a Response</h4>
         </p>
         <p>
-          <h4>Link a log</h4>
-            This requires someone to be logged in to view this page so this section breaks the workflow outlined in post_a_response.jpg
-        </p>
-        <p>
           <h4>Response Information</h4>
           <form action="/postresponse/" method="POST" name="post_response_form">
-            Response URL: <br /><input type="text" name="response_url" /> <br />
+            Response URL: <input type="text" name="response_url" /> <br />
             Campaigns: <input id="tags" type="text" name="campaigns" /> <a href="javascript: addTag();">Add</a>
             <ul id="selected_campaigns" />
               <li id="default_campaign" style="color:red;">No Campaigns Selected</li>

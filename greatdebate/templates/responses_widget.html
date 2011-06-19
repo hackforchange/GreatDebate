@@ -6,19 +6,19 @@
     <title>Great Debate</title>
     <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <h1>Decision Maker Responses</h1>
+  <body style="width:250px;height:200px;">
+    <h2 style="font-size:18px;">Decision Maker Responses</h2>
     {% if responses %}
       {% for response in responses %}
-        <h2 style="font-size: 15px;">
+        <h4 style="font-size: 12px;">
           <a href="{{ response.response_url }}" target="_blank">
             {{ response.decision_maker.name }} - 
             {{ response.decision_maker.title }}
           </a>
-        </h2>
+        </h4>
       {% endfor %}
     {% else %}
-      <p>No Responses have yet been posted</p>
+      <h4 style="font-size:12px;">No Responses have yet been posted</h4>
     {% endif %}
     
   </body>
