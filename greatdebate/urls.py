@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),
     url(r'^button/$', 'greatdebate.apps.campaigns.views.button_html'),
+    url(r'^campaign_lookup/$', 'greatdebate.apps.campaigns.views.campaign_lookup'),
+
     # Decision Makers
     url(r'^respond/', 'greatdebate.apps.decisionMakers.views.response_template'),
     url(r'^decision_maker_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),

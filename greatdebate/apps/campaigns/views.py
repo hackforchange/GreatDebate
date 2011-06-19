@@ -9,6 +9,8 @@ from greatdebate.apps.organizers.models import Organizer
 from greatdebate.apps.decisionMakers.models import DecisionMaker, DecisionMakerResponse
 from greatdebate.apps.activists.models import Activist, ActivistResponse
 from StringIO import StringIO
+from django.db.models import Q
+from json import dumps
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
@@ -73,7 +75,6 @@ def current_campaigns(request):
   campaigns = Campaign.objects.all()
   return render_to_response('campaigns.html', {'campaigns': campaigns})
 
-
 def campaign_responses(request):
   #Returns all the responses by decision makers for a given campaign
   base_url = settings.URL_ROOT
@@ -112,3 +113,11 @@ def export_data(request, campaign_id):
   response['Content-Disposition'] = 'attachement; filename=%s.csv' % (campaign.campaign_url[:10])
   return response
   
+def campaign_lookup(request, limit=5):
+  #Looks up campaigns for dm's to respond to
+  term = request.GET['term']
+  campaigns = Campaign.objects.filter(Q(name__icontains=term))[:limit]
+  results = []
+  for c in campaigns:
+    results.append({"label":c.name, "id":c.id})
+  return HttpResponse(dumps(results), mimetype='application/javascript')
