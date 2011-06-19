@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Create A Campaign</title>
+    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
+    <div id="container">
+      <div id="logo">
+        <a href="/"><img src="/media/images/greatdebate.gif" /></a>
+      </div>
+      <div id="sidebar">
+      </div><!--sidebar-->
+      <div id="body">
+      <h3>Your Campaigns <a href="/create_campaign/">Create Campaign</a></h3>
+        {% if campaigns %}
+          {% for campaign in campaigns %}
+            {{ campaign.campaign_url }} <a href="/export_campaign_data/{{ campaign.id }}/">Export</a><br />
+          {% endfor %}
+        {% else %}
+          <h3>No Campaigns</h3>
+        {% endif %}
+      </div><!--body-->
+
+      <div id="footer"><a href="#">About Us</a> | <a href="#">Privacy</a> | <a href="#">Terms of Use</a> | <a href="#">Contact Us</a> | <a href="#">Help & Support</a> | <a href="#">Blog</a> </div>
+    </div><!--container-->
+  </body>
+</html>

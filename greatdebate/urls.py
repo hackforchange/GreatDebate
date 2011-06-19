@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^create_campaign/', 'greatdebate.apps.campaigns.views.create_campaign_template'),
     url(r'^save_campaign/', 'greatdebate.apps.campaigns.views.save_campaign'),
     url(r'^button/', 'greatdebate.apps.campaigns.views.button_html'),
+    url(r'^current_campaigns/', 'greatdebate.apps.campaigns.views.current_campaigns'),
     # Activists
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),

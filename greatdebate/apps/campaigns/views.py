@@ -55,3 +55,6 @@ def button_html(request):
   }
   return render_to_response('button.html',context)
 
+def current_campaigns(request):
+  campaigns = Campaign.objects.all()
+  return render_to_response('campaigns.html', {'campaigns': campaigns})
