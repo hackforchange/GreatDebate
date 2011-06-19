@@ -5,7 +5,11 @@ from django.template import RequestContext
 from django.views.decorators.http import require_POST
 from greatdebate.apps.campaigns.models import Campaign
 from greatdebate.apps.decisionMakers.models import DecisionMaker
+<<<<<<< HEAD:greatdebate/apps/campaigns/views.py
 from greatdebate.apps.activists.models import ActivistResponse
+=======
+from greatdebate.apps.activists.models import Activist, ActivistResponse
+>>>>>>> 2a481f72d04619d002df2d0b01843702a72cd4a8:greatdebate/apps/campaigns/views.py
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
