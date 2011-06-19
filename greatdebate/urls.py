@@ -14,13 +14,15 @@ urlpatterns = patterns('',
     url(r'^save_campaign/', 'greatdebate.apps.campaigns.views.save_campaign'),
     url(r'^button/', 'greatdebate.apps.campaigns.views.button_html'),
     url(r'^current_campaigns/', 'greatdebate.apps.campaigns.views.current_campaigns'),
+    url(r'^responses/', 'greatdebate.apps.campaigns.views.campaign_responses'),
+    
     # Activists
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),
     url(r'^button/$', 'greatdebate.apps.campaigns.views.button_html'),
     # Decision Makers
     url(r'^respond/', 'greatdebate.apps.decisionMakers.views.response_template'),
-    url(r'^dm_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),
+    url(r'^decision_maker_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),
     url(r'^post_response/', 'greatdebate.apps.decisionMakers.views.post_response'),
     # Organizers
     url(r'^$', 'greatdebate.apps.organizers.views.render_home'),
