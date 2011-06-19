@@ -1,13 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" style="background:none;">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Great Debate</title>
     <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      div {
+        background-attachment: fixed;
+        background-image: url("/media/images/graygradient.gif");
+        background-position: center bottom;
+        background-repeat: repeat-x; 
+        height: 100%;
+      }
+    </style>
   </head>
-  <body style="width:250px;height:200px;">
+  <body style="width:250px;height:200px;background:none;">
     <h2 style="font-size:18px;">Decision Maker Responses</h2>
+    <div>
     {% if responses %}
       {% for response in responses %}
         <h4 style="font-size: 12px;">
@@ -18,8 +28,14 @@
         </h4>
       {% endfor %}
     {% else %}
-      <h4 style="font-size:12px;">No Responses have yet been posted</h4>
+      <h4 style="font-size:12px;">No Responses have been posted.</h4>
     {% endif %}
-    
+      <h4 style="font-size:12px;">
+        Are you a decision maker?
+        <a href="{{ base_url }}respond/" target="_blank">
+          Respond Here.
+        </a>
+      </h4>
+    </div> 
   </body>
 </html>
