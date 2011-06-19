@@ -88,13 +88,29 @@
       </div><!--sidebar-->
       <div id="body">
         <p>
-          <h4>Post a Response</h4>
+          <h2>Post a Response</h2>
         </p>
         <p>
           <h4>Response Information</h4>
           <form action="/post_response/" method="POST" name="post_response_form">
-            Response URL: <input type="text" name="response_url" /> <br />
-            Campaigns: <input id="tags" type="text" name="campaigns" /> <a href="javascript: addTag();">Add</a>
+            <table>
+            <tr>
+            <td>
+            <span style="font-weight: bold;">Response URL:</span>
+            </td>
+            <td>
+            <input type="text" name="response_url" />
+            </td>
+            </tr>
+            <tr>
+            <td>
+            <span style="font-weight:bold;">Campaigns:</span>
+            </td>
+            <td>
+            <input id="tags" type="text" name="campaigns" /> <a href="javascript: addTag();">Add</a>
+            </td>
+            </tr>
+            </table>
             <ul id="selected_campaigns" />
               <li id="default_campaign" style="color:red;">No Campaigns Selected</li>
             </ul>
