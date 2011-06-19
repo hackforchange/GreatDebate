@@ -36,6 +36,6 @@ def save_campaign(request):
       except DecisionMaker.DoesNotExist:
         continue
       campaign.decision_maker.add(dm)
-    response_iframe = ''
+    response_iframe = '<iframe src="%sresponses/?campaign_id=%s" scrolling="no" frameboarder="0"' % (settings.URL_ROOT, campaign.id)
     takeaction_iframe = '<iframe src="%sbutton/?campaign_id=%s" scrolling="no" frameborder="0"></iframe>' % (settings.URL_ROOT, campaign.id)
     return render_to_response('create_campaign.html', {'takeaction_iframe': takeaction_iframe, 'response_iframe': response_iframe}, context_instance=RequestContext(request))
