@@ -1,0 +1,166 @@
+<html>
+<head>
+<style type="text/css">
+
+body {
+    width: 140px;
+}
+
+a {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    display: block;
+    margin: 0;
+    outline: medium none;
+    overflow: visible;
+    padding: 0;
+    text-decoration: none;
+}
+.tb a {
+    height: 20px;
+}
+.offscreen {
+    left: -999em;
+    position: absolute;
+}
+.t-count {
+}
+.show-count .t-count {
+    visibility: visible;
+}
+.tb-container {
+    display: block;
+}
+.tb {
+    display: block;
+    height: 20px;
+}
+.tb, .t-count, .t-count a {
+    background: url("http://platform.twitter.com/widgets/images/tweet.png") no-repeat scroll 0 0 transparent;
+}
+.tb a span {
+    left: -999em;
+    position: absolute;
+}
+.tb:hover, .tb-focus {
+    background-position: 0 -21px;
+}
+.tb:active {
+    background-position: 0 -42px;
+}
+.ncount .t-count {
+    display: none;
+}
+.vcount .t-count, .hcount .t-count {
+    display: block;
+}
+.hcount .tb {
+    float: left;
+    width: 55px;
+}
+.hcount .t-count {
+    background-position: 0 -145px;
+    float: left;
+    height: 20px;
+    margin: 0 0 0 3px;
+    padding: 0 0 0 8px;
+}
+.hcount .t-count a {
+    background-position: right -145px;
+    color: #2A7090;
+    display: block;
+    font: bold 12px/20px Arial,Helvetica,sans-serif;
+    height: 20px;
+    margin: 0 -1px 0 0;
+    min-width: 26px;
+    padding: 0 4px 0 0;
+    text-align: center;
+}
+.hcount .t-count.enabled:hover, .hcount .t-count-focus.enabled {
+    background-position: 0 -166px;
+}
+.hcount .t-count.enabled:hover a, .hcount .t-count-focus.enabled a {
+    background-position: right -166px;
+    color: #30566D;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.vcount .tb-container {
+    height: 40px;
+    position: relative;
+    width: 55px;
+}
+.vcount .tb {
+    margin-top: 16px;
+    position: absolute;
+    width: 100%;
+}
+.vcount .t-count {
+    background-position: 0 -63px;
+    height: 40px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.vcount .t-count a {
+    background-image: none;
+    color: #2A7090;
+    font: bold 16px/34px Arial,Helvetica,sans-serif;
+    height: 34px;
+}
+.vcount .t-count.enabled:hover, .vcount .t-count-focus.enabled {
+    background-position: 0 -104px;
+}
+.vcount .t-count.enabled:hover a, .vcount .t-count-focus.enabled a {
+    color: #30566D;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+</style>
+
+<script>
+
+function getQuerystring(key, default_) {
+  if (default_==null) default_="";
+  key = key.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regex = new RegExp("[\\?&]"+key+"=([^&#]*)");
+  var qs = regex.exec(window.location.href);
+  if(qs == null)
+    return default_;
+  else
+    return qs[1];
+}
+
+campaign_id = getQuerystring('campaign_id');
+
+resp_count = {{ resp_count }};
+
+function takeActionPopUp() {
+  win = window.open('{{ base_url }}takeaction/?campaign_id='+campaign_id, 'TakeAction', 'width=350, height=650, resizable=no');
+  win.onunload = onun;
+  return false;
+}
+
+function increment() {
+  resp_count++;
+  document.getElementById('count').innerHTML = resp_count;
+}
+function onun() {
+  if(win.location != "about:blank") {
+    increment();
+  }
+}
+
+</script>
+</head>
+<body class="vcount undefined vcount-undefined show-count">
+
+<span class="tb-container" id="tweet-button">
+ <span class="t-count enabled">
+  <a onclick="takeActionPopUp();" tabindex="2" id="count" href="#" aria-describedby="count-desc">{{ resp_count }}</a>
+ </span>
+</span>
+<a onclick="takeActionPopUp();" href="#">
+<img src="/media/images/takeaction.gif" />
+</a>
+</body>
+</html>
