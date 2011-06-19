@@ -19,16 +19,16 @@ def save_campaign(request):
   required_fields_list = [
     'campaign_url',
     'decision_makers',
-    'name',
     'email',
   ]
   for field in required_fields_list:
     if field not in request.POST:
       return HttpResponse('Missing %s param in request' % (field))
   email = request.POST.get('email', None)
+  new_organizer = None
   if email is not None:
     try:
-      Organizer.objects.get(email=email)
+      new_organizer = Organizer.objects.get(email=email)
     except Organizer.DoesNotExist:
       new_organizer = Organizer(email=email)
       new_organizer.save()
@@ -38,6 +38,7 @@ def save_campaign(request):
   except Campaign.DoesNotExist:
     new_campaign_params = {
       'campaign_url': request.POST['campaign_url'],
+      'organizer': new_organizer,
     } 
     campaign = Campaign(**new_campaign_params)
     campaign.save()
