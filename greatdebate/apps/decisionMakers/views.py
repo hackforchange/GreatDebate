@@ -14,7 +14,7 @@ def decision_maker_lookup(request, limit=5):
   decision_makers = DecisionMaker.objects.filter(Q(name__icontains=term) | Q(title__icontains=term))[:limit]
   results = []
   for dm in decision_makers:
-    results.append({"label":dm.name + ' ' + dm.title,"id":dm.id})
+    results.append({"label":dm.name + ' -  ' + dm.title,"id":dm.id})
   return HttpResponse(dumps(results), mimetype='application/javascript')
 
 @require_POST
