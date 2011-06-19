@@ -2,6 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
+    <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis+Light&v1' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Create A Campaign</title>
     <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
@@ -92,10 +93,6 @@
           <h4>Create a campaign</h4>
           GreatDebate will create a take action button for your campaign
         </p>
-          <p>
-            <h4>Link a login (optional)</h4>
-            Setup a login so you can access your campaign results
-          </p>
         <p>
           <h4>Campaign Information</h4>
           We need a little bit of information to set up your campaign
@@ -107,19 +104,22 @@
             <ul id="selected_dms" />
               <li id="default_dm" style="color:red;">No Decision Makers Selected</li>
             </ul>
-            <h4>Title: <input type="text" name="campaign_title" /></h4>
-            <h4>Body: <input type="text" name="campaign_body" /></h4>
           </form>
         </p>
         <p>
           <h4>TakeAction Form (<a href="javascript: verify_dm_is_selected();">Get Button code</a>)</h4>
         </p>
-
+        </br>
         <p>
           <h4>The code below will create a takeaction button for your site</h4>
           <textarea cols="30" rows="4">
             {{ takeaction_url }}
           </textarea> 
+          </br>
+          <h4>The code below will create a response widget for your site</h4>
+            <textarea cols="30" rows="4">
+              {{ takeaction_url }}
+            </textarea>
       </div><!--body-->
 
       <div id="footer"><a href="#">About Us</a> | <a href="#">Privacy</a> | <a href="#">Terms of Use</a> | <a href="#">Contact Us</a> | <a href="#">Help & Support</a> | <a href="#">Blog</a> </div>

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Great Debate</title>
+    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h2>Thank you for taking action</h2>
+    {% if dm_responses %}
+      {% for response in dm_responses %}
+        {{ response.url }}
+      {% endfor %} 
+    {% else %}
+      <h3>There are no responses for this campaign yet</h3>
+      <h3>This window will close in 3 seconds</h3>
+      <script>
+        setTimeout('window.close()',3000);
+      </script>
+    {% endif %}
+  </body>
+</html>

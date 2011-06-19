@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Great Debate</title>
+    <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      .column {margin-left:50px;} 
+      a {padding-top: 10px;}
+    </style>
+    <script type="text/javascript">
+      function validateEmail() {
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailPattern.test(document.getElementById('email').value)) {
+          var alertDiv = document.getElementById('email_alert');
+          alertDiv.innerText = "Please provide your email address";
+          return false;  
+        } 
+        document.takeaction_activist.submit();
+      }
+    </script>
+  </head>
+  <body>
+    <div class="column">
+      <!--
+      <h2>Title:</h2>
+      <p><h2>{{ campaign.title }}</h2></p>
+      <h2>Description:</h2>
+      <p><h2>{{ campaign.body }}</h2></p>
+      -->
+      {% if dms %}  
+        <h1>Decision Makers:</h1>
+        {% for dm in dms %}
+          <p><h1>{{ dm.first_name }} {{ dm.last_name }}</h1></p>
+        {% endfor %}
+      {% endif %}
+      <div id="email_alert" style="color:red;font-size:16px;"></div>
+      <form method="POST" action="/process_takeaction/" name="takeaction_activist">
+        <h2 class="ta">*Email:</h2>
+        <input type="text" name="email" id="email"/><br />
+        <h2 class="ta">First Name:</h2>
+        <input type="text" name="first_name" /><br />
+        <h2 class="ta">Last Name:</h2> 
+        <input type="text" name="last_name" /><br />
+        <h2 class="ta">Address:</h2>
+        <input type="text" name="address" /><br />
+        <h2 class="ta">City:</h2>
+        <input type="text" name="city" /><br />
+        <h2 class="ta">Zip:</h2>
+        <input type="text" name="zip" /><br />
+        <h2 class="ta">Neighborhood:</h2>
+        <input type="text" name="neighborhood" /><br />
+        <h2 class="ta">Privacy:</h2>
+        <select name="privacy_level_id" style="width: 174px;">
+          {% for level in privacy_levels %}
+            <option value="{{ level.id }}">{{ level.name }}</option>
+          {% endfor %}
+        </select>
+        <br />
+        <h2 class="ta">Message:</h2>
+        <textarea name="message" cols="20" rows="3">
+        </textarea>
+        <br />
+        <input type="hidden" name="campaign_id" value="{{ campaign.id }}" />
+    
+      </form>
+      <a href="#" onclick="return validateEmail();"><img src="/media/images/takeaction.gif" /></a>
+    </div> <!--.column -->
+  </body>
+</html>
