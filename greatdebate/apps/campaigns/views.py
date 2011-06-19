@@ -19,6 +19,7 @@ def save_campaign(request):
   required_fields_list = [
     'campaign_url',
     'decision_makers',
+    'name',
     'email',
   ]
   for field in required_fields_list:

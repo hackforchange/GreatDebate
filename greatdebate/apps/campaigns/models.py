@@ -9,4 +9,4 @@ class Campaign(models.Model):
   decision_maker = models.ManyToManyField(DecisionMaker)
   campaign_url = models.TextField()
   def __unicode__(self):
-    return self.campaign_url[:10]
+    return u'%s' % (self.campaign_url[:10])
