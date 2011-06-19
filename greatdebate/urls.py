@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^current_campaigns/', 'greatdebate.apps.campaigns.views.current_campaigns'),
     url(r'^responses/', 'greatdebate.apps.campaigns.views.campaign_responses'),
     url(r'^export_campaign_data/(?P<campaign_id>\d+)/', 'greatdebate.apps.campaigns.views.export_data'),
+    url(r'^api/campaign/responses/get/(?P<campaign_id>\d+)/', 'greatdebate.apps.campaigns.views.campaign_responses_get'),
     # Activists
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),

@@ -3,12 +3,14 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from greatdebate.apps.campaigns.models import Campaign
 from greatdebate.apps.organizers.models import Organizer
 from greatdebate.apps.decisionMakers.models import DecisionMaker, DecisionMakerResponse
 from greatdebate.apps.activists.models import Activist, ActivistResponse
 from StringIO import StringIO
+from django.db.models import Q
+from json import dumps
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
@@ -119,3 +121,30 @@ def campaign_lookup(request, limit=5):
   for c in campaigns:
     results.append({"label":c.name, "id":c.id})
   return HttpResponse(dumps(results), mimetype='application/javascript')
+
+@require_GET
+def campaign_responses_get(request, campaign_id):
+  """exports data as json for a certain campaign"""
+  try:
+    campaign = Campaign.objects.get(pk=campaign_id)
+  except Campaign.DoesNotExist:
+    return HttpResponse('No campaign exists with id %s' % (campaign_id))
+  activist_responses = ActivistResponse.objects.filter(campaign__id=campaign_id)
+  output_list = []
+  for activist_response in activist_responses:
+    activist_tmp_dict = {
+      'first_name': activist_response.activist.first_name or 'None',
+      'last_name': activist_response.activist.last_name or 'None', 
+      'email': activist_response.activist.email or 'None', 
+      'address': activist_response.activist.address or 'None', 
+      'city': activist_response.activist.city or 'None', 
+      'zip': activist_response.activist.zip or 'None', 
+      'message': activist_response.message or 'None',
+    }
+    output_list.append(activist_tmp_dict)
+  return HttpResponse(dumps(output_list), mimetype='application/javascript')  
+
+
+
+
+
