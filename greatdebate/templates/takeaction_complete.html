@@ -11,7 +11,10 @@
     <h2>Thank you for taking action</h2>
     {% if dm_responses %}
       {% for response in dm_responses %}
-        {{ response.url }}
+        <a target="_blank" href="{{ response.response_url }}">
+          {{ response.decision_maker.name}} - 
+          {{ response.decision_maker.title}}
+        </a>
       {% endfor %} 
     {% else %}
       <h3>There are no responses for this campaign yet</h3>
