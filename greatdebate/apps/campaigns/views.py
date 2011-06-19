@@ -39,3 +39,16 @@ def save_campaign(request):
     response_iframe = '<iframe src="%sresponses/?campaign_id=%s" scrolling="no" frameboarder="0"' % (settings.URL_ROOT, campaign.id)
     takeaction_iframe = '<iframe src="%sbutton/?campaign_id=%s" scrolling="no" frameborder="0"></iframe>' % (settings.URL_ROOT, campaign.id)
     return render_to_response('create_campaign.html', {'takeaction_iframe': takeaction_iframe, 'response_iframe': response_iframe}, context_instance=RequestContext(request))
+
+def button_html(request):
+  # Returns markup for take action button
+  base_url = settings.URL_ROOT
+  campaign_id = request.GET['campaign_id']
+  resp_count = ActivistResponse.objects.filter(campaign=campaign_id).count()
+  context = {
+    'campaign_id': campaign_id,
+    'base_url': base_url,
+    'resp_count': resp_count,
+  }
+  return render_to_response('button.html',context)
+
