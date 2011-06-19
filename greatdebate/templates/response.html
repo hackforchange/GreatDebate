@@ -4,7 +4,7 @@
   <head>
     <link href='http://fonts.googleapis.com/css?family=Terminal+Dosis+Light&v1' rel='stylesheet' type='text/css'>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Create A Campaign</title>
+    <title>Post a Response</title>
     <link href="/media/css/style.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="/media/js/jquery-ui-1.8.2.custom.min.js"></script>
@@ -88,13 +88,29 @@
       </div><!--sidebar-->
       <div id="body">
         <p>
-          <h4>Post a Response</h4>
+          <h2>Post a Response</h2>
         </p>
         <p>
           <h4>Response Information</h4>
           <form action="/post_response/" method="POST" name="post_response_form">
-            Response URL: <input type="text" name="response_url" /> <br />
-            Campaigns: <input id="tags" type="text" name="campaigns" /> <a href="javascript: addTag();">Add</a>
+            <table>
+            <tr>
+            <td>
+            <span style="font-weight: bold;">Response URL:</span>
+            </td>
+            <td>
+            <input type="text" name="response_url" />
+            </td>
+            </tr>
+            <tr>
+            <td>
+            <span style="font-weight:bold;">Campaigns:</span>
+            </td>
+            <td>
+            <input id="tags" type="text" name="campaigns" /> <a href="javascript: addTag();">Add</a>
+            </td>
+            </tr>
+            </table>
             <ul id="selected_campaigns" />
               <li id="default_campaign" style="color:red;">No Campaigns Selected</li>
             </ul>
@@ -102,6 +118,7 @@
           <br /><br />
           <a href="javascript: verify_campaign_is_selected();">Post my Response</a>
         </p>
+        <div style="font-weight:bold">{{ response_msg }}</div>
       </div><!--body-->
 
       <div id="footer"><a href="#">About Us</a> | <a href="#">Privacy</a> | <a href="#">Terms of Use</a> | <a href="#">Contact Us</a> | <a href="#">Help & Support</a> | <a href="#">Blog</a> </div>
