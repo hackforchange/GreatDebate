@@ -3,3 +3,6 @@ local_settings.py
 *.pyc
 *.pyo
 *.swp
+*.png
+*.gif
+*.jpg
