@@ -9,8 +9,6 @@ from greatdebate.apps.organizers.models import Organizer
 from greatdebate.apps.decisionMakers.models import DecisionMaker, DecisionMakerResponse
 from greatdebate.apps.activists.models import Activist, ActivistResponse
 from StringIO import StringIO
-from django.db.models import Q
-from json import dumps
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
@@ -53,7 +51,7 @@ def save_campaign(request):
       except DecisionMaker.DoesNotExist:
         continue
       campaign.decision_maker.add(dm)
-    response_iframe = '<iframe src="%sresponses/?campaign_id=%s" scrolling="no" frameboarder="0"' % (settings.URL_ROOT, campaign.id)
+    response_iframe = '<iframe src="%sresponses/?campaign_id=%s" scrolling="no" frameboarder="0"></iframe>' % (settings.URL_ROOT, campaign.id)
     takeaction_iframe = '<iframe src="%sbutton/?campaign_id=%s" scrolling="no" frameborder="0"></iframe>' % (settings.URL_ROOT, campaign.id)
     return render_to_response('create_campaign.html', {'takeaction_iframe': takeaction_iframe, 'response_iframe': response_iframe}, context_instance=RequestContext(request))
 
@@ -74,6 +72,7 @@ def button_html(request):
 def current_campaigns(request):
   campaigns = Campaign.objects.all()
   return render_to_response('campaigns.html', {'campaigns': campaigns})
+
 
 def campaign_responses(request):
   #Returns all the responses by decision makers for a given campaign
@@ -113,11 +112,3 @@ def export_data(request, campaign_id):
   response['Content-Disposition'] = 'attachement; filename=%s.csv' % (campaign.campaign_url[:10])
   return response
   
-def campaign_lookup(request, limit=5):
-  #Looks up campaigns for dm's to respond to
-  term = request.GET['term']
-  campaigns = Campaign.objects.filter(Q(name__icontains=term))[:limit]
-  results = []
-  for c in campaigns:
-    results.append({"label":c.name, "id":c.id})
-  return HttpResponse(dumps(results), mimetype='application/javascript')
