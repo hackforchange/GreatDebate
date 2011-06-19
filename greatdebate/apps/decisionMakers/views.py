@@ -17,6 +17,15 @@ def decision_maker_lookup(request, limit=5):
     results.append({"label":dm.name + ' ' + dm.title,"id":dm.id})
   return HttpResponse(dumps(results), mimetype='application/javascript')
 
+def get_responses(request):
+  #Get's all the 
+  campaign = Campaign.objects.get(pk=request.GET['campaign_id'])
+  dm_responses = DecisionMakerResponse.objects.filter(campaign=campaign)
+  context_dict = {
+    'dm_responses': dm_responses,
+  }
+  return render_to_response('responses.html', context_dict)
+
 def post_response(request):
   # Saves DM's response to a set of campaigns
   campaigns = request.POST['campaign_ids'].splt(',')
