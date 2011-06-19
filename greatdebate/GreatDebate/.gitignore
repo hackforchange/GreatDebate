@@ -1,5 +1,0 @@
-local_settings.py
-*.db
-*.pyc
-*.pyo
-*.swp
