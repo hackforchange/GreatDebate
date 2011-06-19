@@ -9,6 +9,12 @@
     <script type="text/javascript" src="/media/js/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="/media/js/jquery-ui-1.8.2.custom.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/media/css/jquery-ui-1.8.2.custom.css" />
+  <style type="text/css">
+    ul.ui-autocomplete {
+      list-style: none;
+      font-size: 14px;
+    }
+  </style>
     <script>
     $(function() {
      tag_hash = [];
@@ -84,28 +90,21 @@
         </div>
       </div><!--sidebar-->
       <div id="body">
-        <p>
           <h4>Create a campaign</h4>
           GreatDebate will create a take action button for your campaign
-        </p>
-        <p>
           <h4>Campaign Information</h4>
           We need a little bit of information to set up your campaign
           <form method="POST" action="/save_campaign/" name="save_campaign">
-            <h4>Campaign URL: <input type="text" name="campaign_url" /></h4>
-            <h4>Email: <input type="text" name="email" /></h4>
-            <h4>Decision Makers: <input id="tags" type="text" name="decision_makers" />
+            <h4>Campaign URL: <span class="input"><input type="text" name="campaign_url" /></span></h4>
+            <h4>Email: <span class="input"><input type="text" name="email" /></span></h4>
+            <h4>Decision Makers: <span class="input"><input id="tags" type="text" name="decision_makers" /></span>
               <a href="javascript: addTag();">Add</a>  <a href="/new_dm/">New</a>
             </h4>
             <ul id="selected_dms" />
               <li id="default_dm" style="color:red;">No Decision Makers Selected</li>
             </ul>
           </form>
-        </p>
-        <p>
           <h4>TakeAction Form (<a href="javascript: verify_dm_is_selected();">Get Button code</a>)</h4>
-        </p>
-        <p>
           <h4>The code below will create a takeaction button for your site</h4>
           <textarea cols="30" rows="4">
             {{ takeaction_iframe }}
