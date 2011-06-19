@@ -5,6 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
 from greatdebate.apps.campaigns.models import Campaign
+from greatdebate.apps.organizers.models import Organizer
 from greatdebate.apps.decisionMakers.models import DecisionMaker, DecisionMakerResponse
 from greatdebate.apps.activists.models import Activist, ActivistResponse
 from StringIO import StringIO
@@ -23,6 +24,13 @@ def save_campaign(request):
   for field in required_fields_list:
     if field not in request.POST:
       return HttpResponse('Missing %s param in request' % (field))
+  email = request.POST.get('email', None)
+  if email is not None:
+    try:
+      Organizer.objects.get(email=email)
+    except Organizer.DoesNotExist:
+      new_organizer = Organizer(email=email)
+      new_organizer.save()
   try:
     campaign = Campaign.objects.get(campaign_url=request.POST['campaign_url'])
     return HttpResponse('Campaign Already Exists with that url')

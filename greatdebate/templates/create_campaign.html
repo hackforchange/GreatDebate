@@ -84,6 +84,7 @@
         </div>
       </div><!--sidebar-->
       <div id="body">
+        <p>
           <h4>Create a campaign</h4>
           GreatDebate will create a take action button for your campaign
         </p>
@@ -92,6 +93,7 @@
           We need a little bit of information to set up your campaign
           <form method="POST" action="/save_campaign/" name="save_campaign">
             <h4>Campaign URL: <input type="text" name="campaign_url" /></h4>
+            <h4>Email: <input type="text" name="email" /></h4>
             <h4>Decision Makers: <input id="tags" type="text" name="decision_makers" />
               <a href="javascript: addTag();">Add</a>  <a href="/new_dm/">New</a>
             </h4>
@@ -107,12 +109,12 @@
         <p>
           <h4>The code below will create a takeaction button for your site</h4>
           <textarea cols="30" rows="4">
-            {{ takeaction_url }}
+            {{ takeaction_iframe }}
           </textarea> 
           </br>
           <h4>The code below will create a response widget for your site</h4>
             <textarea cols="30" rows="4">
-              {{ takeaction_url }}
+              {{ response_iframe }}
             </textarea>
       </div><!--body-->
 
