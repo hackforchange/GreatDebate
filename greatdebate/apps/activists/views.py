@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
-from django.view.decorators import require_POST, require_GET
-from greatdebate.apps.activist.models import Activist, ActivistResponse
+from django.views.decorators.http import require_POST, require_GET
+from greatdebate.apps.activists.models import Activist, ActivistResponse
 from greatdebate.apps.campaigns.models import Campaign
 from greatdebate.apps.decisionMakers.models import DecisionMakerResponse
 
@@ -26,9 +26,9 @@ def process_takeaction(request):
     'zip',
     'message',
   ]
-
+  activist_add_params = {}
   for param in expected_params:
-    if request.POST[param]:
+    if request.POST.get(param, False):
       activist_add_params[param] = request.POST[param]
     else:
       activist_add_params[param] = None
@@ -41,7 +41,7 @@ def process_takeaction(request):
 
   response_add_params = {
     'campaign': campaign,
-    'activist': activist,
+    'activist': new_activist,
     'message': message,
   }
   new_activist_response = ActivistResponse(**response_add_params)
@@ -53,10 +53,17 @@ def process_takeaction(request):
   }
   return render_to_response('takeaction_complete.html',context_dict)
 
+
 def take_action_template(request):
   """
   Requires campaign id in GET params, shows form that users can use to take action
   """
+  if 'campaign_id' not in request.GET:
+    return HttpResponse('campaign id not in request')
+  try:
+    campaign = Campaign.objects.get(pk=request.GET['campaign_id'])
+  except (Campaign.DoesNotExist, ValueError):
+    return HttpResponse('Campaign does not exist for %s' % (request.GET['campaign_id']))
   dms = campaign.decision_maker.all()
   context_dict = {
     'dms': dms,

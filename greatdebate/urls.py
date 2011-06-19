@@ -9,9 +9,12 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'greatdebate.views.home', name='home'),
     # url(r'^greatdebate/', include('greatdebate.foo.urls')),
+    # Campaigns
     url(r'^create_campaign/', 'greatdebate.apps.campaigns.views.create_campaign_template'),
     url(r'^save_campaign/', 'greatdebate.apps.campaigns.views.save_campaign'),
-
+    # Activists
+    url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
+    url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),
 
 
     # Uncomment the admin/doc line below to enable admin documentation:
