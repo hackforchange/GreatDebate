@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^button/$', 'greatdebate.apps.campaigns.views.button_html'),
     # Decision Makers
     url(r'^respond/', 'greatdebate.apps.decisionMakers.views.response_template'),
-    url(r'^dm_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),
+    url(r'^decision_maker_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),
     url(r'^post_response/', 'greatdebate.apps.decisionMakers.views.post_response'),
     # Organizers
     url(r'^$', 'greatdebate.apps.organizers.views.render_home'),
