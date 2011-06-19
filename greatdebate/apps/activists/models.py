@@ -23,4 +23,4 @@ class ActivistResponse(models.Model):
   message = models.TextField(null=True, blank=True)
 
   def __unicode__(self):
-    return u'%s-%s' % (self.campaign.title, self.activist.first_name)
+    return u'%s-%s' % (self.campaign.campaign_url[:8], self.activist.first_name)

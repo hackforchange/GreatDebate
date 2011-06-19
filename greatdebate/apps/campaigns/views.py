@@ -1,3 +1,4 @@
+from csv import writer
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
@@ -6,6 +7,7 @@ from django.views.decorators.http import require_POST
 from greatdebate.apps.campaigns.models import Campaign
 from greatdebate.apps.decisionMakers.models import DecisionMaker, DecisionMakerResponse
 from greatdebate.apps.activists.models import Activist, ActivistResponse
+from StringIO import StringIO
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
@@ -71,3 +73,30 @@ def campaign_responses(request):
     'responses': responses,
   }
   return render_to_response('responses_widget.html',context)
+
+def export_data(request, campaign_id):
+  """exports data s csv for a certain campaign"""
+  try:
+    campaign = Campaign.objects.get(pk=campaign_id)
+  except Campaign.DoesNotExist:
+    return HttpResponse('No campaign exists with id %s' % (campaign_id))
+  activist_responses = ActivistResponse.objects.filter(campaign__id=campaign_id)
+  tmp_file = StringIO()
+  response_csv = writer(tmp_file)
+  response_csv.writerow(['First Name', 'Last Name', 'Email', 'Address', 'City', 'Zip', 'Message'])
+  for activist_response in activist_responses:
+    response_csv.writerow([
+      activist_response.activist.first_name or 'None',
+      activist_response.activist.last_name or 'None', 
+      activist_response.activist.email or 'None', 
+      activist_response.activist.address or 'None', 
+      activist_response.activist.city or 'None', 
+      activist_response.activist.zip or 'None', 
+      activist_response.message or 'None',
+    ])
+  tmp_file.seek(0)    
+  response = HttpResponse(tmp_file)
+  response['Content-type'] = 'application/force-download'
+  response['Content-Disposition'] = 'attachement; filename=%s.csv' % (campaign.campaign_url[:10])
+  return response
+  
