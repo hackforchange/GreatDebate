@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     # Campaigns
     url(r'^create_campaign/', 'greatdebate.apps.campaigns.views.create_campaign_template'),
     url(r'^save_campaign/', 'greatdebate.apps.campaigns.views.save_campaign'),
+    url(r'^button/', 'greatdebate.apps.campaigns.views.button_html'),
+    
     # Activists
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),

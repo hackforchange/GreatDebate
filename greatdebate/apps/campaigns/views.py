@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.views.decorators.http import require_POST
 from greatdebate.apps.campaigns.models import Campaign
 from greatdebate.apps.decisionMakers.models import DecisionMaker
+from greatdebate.apps.activists.models import ActivistResponse
 
 def create_campaign_template(request):
   return render_to_response('create_campaign.html')
@@ -43,7 +44,9 @@ def save_campaign(request):
 def button_html(request):
   # Returns markup for take action button
   base_url = settings.URL_ROOT
-  campaign_id = request.GET['campaign_id']
+  campaign_id = request.GET.get('campaign_id', None)
+  if campaign_id is None:
+    return HttpResponse('NO campaign id in request')
   resp_count = ActivistResponse.objects.filter(campaign=campaign_id).count()
   context = {
     'campaign_id': campaign_id,

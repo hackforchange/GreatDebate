@@ -33,5 +33,12 @@ class ActivistsTestCase(TestCase):
     new_campaign = Campaign(campaign_url='test.com')
     new_campaign.save()  
     response = self.client.get('/takeaction/?campaign_id=%s' % (new_campaign.id))
-    #import ipdb; ipdb.set_trace()
     self.assertEqual('takeaction.html', response.templates[0].name) 
+
+  def test_button_html_success(self):
+    """Test we can render button.html"""
+    new_campaign = Campaign(campaign_url='test.com')
+    new_campaign.save()  
+    response = self.client.get('/button/?campaign_id=%s' % (new_campaign.id))
+    #import ipdb; ipdb.set_trace()
+    self.assertEqual('button.html', response.templates[0].name)
