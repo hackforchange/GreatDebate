@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'greatdebate.apps.activists',
@@ -162,3 +163,10 @@ except ImportError:
 SERVE_MEDIA = DEBUG
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "site_media")
 MEDIA_URL = "/media/"
+
+if 'test' in sys.argv:
+  DATABASE_ENGINE = 'sqlite3'          
+  DATABASE_NAME = 'test.db'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+FIXTURE_DIRS = (os.path.join(PROJECT_ROOT, 'fixtures'),)
