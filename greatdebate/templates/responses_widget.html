@@ -10,12 +10,12 @@
     <h1>Decision Maker Responses</h1>
     {% if responses %}
       {% for response in responses %}
-       <p>
-        <a href="{{ response.response_url }}" target="_blank">
-          {{ response.decision_maker.name }} - 
-          {{ response.decision_maker.title }}
-        </a>
-      </p>
+        <h2 style="font-size: 15px;">
+          <a href="{{ response.response_url }}" target="_blank">
+            {{ response.decision_maker.name }} - 
+            {{ response.decision_maker.title }}
+          </a>
+        </h2>
       {% endfor %}
     {% else %}
       <p>No Responses have yet been posted</p>

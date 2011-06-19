@@ -52,12 +52,6 @@
         <input type="text" name="zip" /><br />
         <h2 class="ta">Neighborhood:</h2>
         <input type="text" name="neighborhood" /><br />
-        <h2 class="ta">Privacy:</h2>
-        <select name="privacy_level_id" style="width: 174px;">
-          {% for level in privacy_levels %}
-            <option value="{{ level.id }}">{{ level.name }}</option>
-          {% endfor %}
-        </select>
         <br />
         <h2 class="ta">Message:</h2>
         <textarea name="message" cols="20" rows="3">
