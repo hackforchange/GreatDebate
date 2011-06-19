@@ -23,7 +23,9 @@ urlpatterns = patterns('',
     url(r'^respond/', 'greatdebate.apps.decisionMakers.views.response_template'),
     url(r'^dm_lookup/', 'greatdebate.apps.decisionMakers.views.decision_maker_lookup'),
     url(r'^post_response/', 'greatdebate.apps.decisionMakers.views.post_response'),
-
+    # Organizers
+    url(r'^$', 'greatdebate.apps.organizers.views.render_home'),
+    
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
