@@ -33,7 +33,7 @@
       {% if dms %}  
         <h1>Decision Makers:</h1>
         {% for dm in dms %}
-          <p><h1>{{ dm.first_name }} {{ dm.last_name }}</h1></p>
+          <p><h1>{{ dm.name }}, {{ dm.title }}</h1></p>
         {% endfor %}
       {% endif %}
       <div id="email_alert" style="color:red;font-size:16px;"></div>

@@ -18,7 +18,7 @@ class DecisionMakersTestCase(TestCase):
     """Tests we can lookup a dm"""
     new_dm = DecisionMaker(name='barak obama', title='president of the us')
     new_dm.save()
-    response = self.client.get('/dm_lookup/?term=us')
+    response = self.client.get('/decision_maker_lookup/?term=us')
     resp_list = loads(response.content)
     self.assertEqual(resp_list[0]['id'], new_dm.id)
     self.assertTrue(new_dm.title in resp_list[0]['label'])

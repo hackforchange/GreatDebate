@@ -4,6 +4,7 @@ from greatdebate.apps.organizers.models import Organizer
 
 class Campaign(models.Model):
   """Stores Description of campaigns"""
+  name = models.CharField(max_length=255, null=True, blank=True) 
   organizer = models.ForeignKey(Organizer, null=True, blank=True)
   decision_maker = models.ManyToManyField(DecisionMaker)
   campaign_url = models.TextField()

@@ -64,6 +64,7 @@ def take_action_template(request):
     campaign = Campaign.objects.get(pk=request.GET['campaign_id'])
   except (Campaign.DoesNotExist, ValueError):
     return HttpResponse('Campaign does not exist for %s' % (request.GET['campaign_id']))
+  #import ipdb; ipdb.set_trace()
   dms = campaign.decision_maker.all()
   context_dict = {
     'dms': dms,
