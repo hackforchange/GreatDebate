@@ -111,3 +111,11 @@ def export_data(request, campaign_id):
   response['Content-Disposition'] = 'attachement; filename=%s.csv' % (campaign.campaign_url[:10])
   return response
   
+def campaign_lookup(request, limit=5):
+  #Looks up campaigns for dm's to respond to
+  term = request.GET['term']
+  campaigns = Campaign.objects.filter(Q(name__icontains=term))[:limit]
+  results = []
+  for c in campaigns:
+    results.append({"label":c.name, "id":c.id})
+  return HttpResponse(dumps(results), mimetype='application/javascript')

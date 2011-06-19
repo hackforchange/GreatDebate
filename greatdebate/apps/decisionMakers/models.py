@@ -7,6 +7,7 @@ class DecisionMaker(models.Model):
     return self.name[:10]
 
 class DecisionMakerResponse(models.Model):
+  date = models.DateField(auto_now_add=True)
   decision_maker = models.ForeignKey(DecisionMaker)
   campaign = models.ManyToManyField('campaigns.Campaign')
   response_url = models.TextField()
