@@ -25,6 +25,7 @@ def save_campaign(request):
     if field not in request.POST:
       return HttpResponse('Missing %s param in request' % (field))
   email = request.POST.get('email', None)
+  name = request.POST.get('name', None)
   new_organizer = None
   if email is not None:
     try:
@@ -39,6 +40,7 @@ def save_campaign(request):
     new_campaign_params = {
       'campaign_url': request.POST['campaign_url'],
       'organizer': new_organizer,
+      'name': name,
     } 
     campaign = Campaign(**new_campaign_params)
     campaign.save()
