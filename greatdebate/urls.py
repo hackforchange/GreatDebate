@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     # Activists
     url(r'^takeaction/', 'greatdebate.apps.activists.views.take_action_template'),
     url(r'^process_takeaction/', 'greatdebate.apps.activists.views.process_takeaction'),
+    # Decision Makers
+    url(r'^respond/', 'greatdebate.apps.decisionMakers.views.response_template'),
+    
 
 
     # Uncomment the admin/doc line below to enable admin documentation:
