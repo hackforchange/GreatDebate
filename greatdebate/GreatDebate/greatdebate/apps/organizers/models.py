@@ -1,0 +1,6 @@
+from django.db import models
+
+class Organizer(models.Model):
+  email = models.TextField()
+  def __unicode__(self):
+    return self.email[:10]
