@@ -39,3 +39,8 @@ class CampaignsTestCase(TestCase):
     new_campaign = Campaign.objects.filter(campaign_url=post_params['campaign_url'])
     self.assertEqual(new_campaign.count(), 1)
     self.assertEqual(new_campaign[0].decision_maker.all()[0], new_dm)
+
+  def test_create_campaign_template(self):
+    """tests we can render create campaign page"""
+    response = self.client.get('/create_campaign/')
+    self.assertEqual(response.templates[0].name, 'create_campaign.html') 

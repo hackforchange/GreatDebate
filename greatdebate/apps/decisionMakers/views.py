@@ -48,4 +48,4 @@ def post_response(request):
 
 def response_template(request):
   # Renders DM response page
-  return render_to_response('respond.html')
+  return render_to_response('response.html')
